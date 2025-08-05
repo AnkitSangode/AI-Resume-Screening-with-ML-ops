@@ -2,6 +2,7 @@ from src.resumeScreening import logger
 from src.resumeScreening.pipeline.stage_01_data_ingestion import DataIngestionPipeline
 from src.resumeScreening.pipeline.stage_02_data_transformation import DataTransformationPipeline
 from src.resumeScreening.pipeline.stage_03_feature_engineering import FeatureEngineeringPipeline
+from src.resumeScreening.pipeline.stage_04_model_trainer import ModelTrainerPipeline
 
 STAGE_NAME = "Data Ingestion"
 
@@ -33,6 +34,18 @@ if __name__ == "__main__":
     try:
         logger.info(f">>>>>>>>>>> {STAGE_NAME} started <<<<<<<<<<")
         obj = FeatureEngineeringPipeline()
+        obj.main()
+        logger.info(f">>>>>>>>>>>> {STAGE_NAME} completed successfully <<<<<<<<<<<")
+    except Exception as e:
+        raise e
+
+
+STAGE_NAME = 'Model Trainer'
+
+if __name__ == "__main__":
+    try:
+        logger.info(f">>>>>>>>>>> {STAGE_NAME} started <<<<<<<<<<")
+        obj = ModelTrainerPipeline()
         obj.main()
         logger.info(f">>>>>>>>>>>> {STAGE_NAME} completed successfully <<<<<<<<<<<")
     except Exception as e:

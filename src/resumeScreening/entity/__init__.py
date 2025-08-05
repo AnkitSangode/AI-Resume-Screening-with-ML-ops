@@ -11,3 +11,10 @@ class DataIngestionConfig:
 class DataTransformationConfig:
     root_dir: Path
     data_path: Path
+
+
+@dataclass(frozen=True)
+class FeatureEngineeringConfig:
+    root_dir: Path
+    train_data_path: Path
+    test_data_path: Path

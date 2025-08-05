@@ -1,7 +1,8 @@
 from resumeScreening.constants import *
 from resumeScreening.utils.common import read_yaml,create_directories
 from resumeScreening.entity import (DataIngestionConfig,
-                                    DataTransformationConfig)
+                                    DataTransformationConfig,
+                                    FeatureEngineeringConfig,)
 class ConfigurationManager:
     def __init__(
             self,
@@ -39,3 +40,15 @@ class ConfigurationManager:
 
         return data_transformation_config
         
+    def get_feature_engineering_config(self) -> FeatureEngineeringConfig:
+        config = self.config.feature_engineering
+
+        create_directories([config.root_dir])
+
+        feature_engineering_config = FeatureEngineeringConfig(
+            root_dir= config.root_dir,
+            train_data_path = config.train_data_path,
+            test_data_path=config.test_data_path
+        )
+
+        return feature_engineering_config

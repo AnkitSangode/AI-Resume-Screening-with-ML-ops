@@ -9,6 +9,38 @@ from box import ConfigBox
 from pathlib import Path
 from typing import Any
 import base64
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from sklearn.model_selection import train_test_split
+
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("wordnet")
+
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+
+
+
+def clean_resume(text:str) -> str:
+    """
+    Cleans the input resume text by removing URLs, special characters,
+    numbers, and converting to lowercase.
+    """
+    text = re.sub(r"http\S+", " ", text)  # remove URLs
+    text = re.sub(r"RT|cc", " ", text)  # remove retweets
+    text = re.sub(r"#\S+", "", text)  # remove hashtags
+    text = re.sub(r"@\S+", " ", text)  # remove mentions
+    text = re.sub(r"[%s]" % re.escape("""!"$%&'()*+,-./:;<=>?@[\\]^_`{|}~"""), " ", text)  # punctuation
+    text = re.sub(r"[^\x00-\x7f]", r" ", text)  # non-ASCII chars
+    text = re.sub(r"\s+", " ", text)  # extra spaces
+    text = re.sub(r"\d+", "", text)  # remove numbers
+    tokens = word_tokenize(text)
+    tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words and len(word) > 2]
+    return " ".join(tokens)
 
 
 @ensure_annotations
@@ -52,3 +84,4 @@ def decodeImage(imgstring,fileName):
 def encodeImageIntoBase64(croppedImagePath):
     with open(croppedImagePath,'rb') as f:
         return base64.b64encode(f.read()) 
+    

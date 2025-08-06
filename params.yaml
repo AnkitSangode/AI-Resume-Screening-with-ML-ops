@@ -11,3 +11,17 @@ model_training:
   svm:
     C: [0.1, 1]
     kernel: [linear, rbf]
+
+deep_learning:
+  model:
+    layers: [512, 256]
+    dropout: 0.3
+    activation: relu
+    output_activation: softmax
+  compile:
+    loss: categorical_crossentropy
+    optimizer: adam
+    metrics: [accuracy]
+  training:
+    epochs: 10
+    batch_size: 32

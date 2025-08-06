@@ -3,7 +3,8 @@ from resumeScreening.utils.common import read_yaml,create_directories
 from resumeScreening.entity import (DataIngestionConfig,
                                     DataTransformationConfig,
                                     FeatureEngineeringConfig,
-                                    ModelTrainerConfig,)
+                                    ModelTrainerConfig,
+                                    DeepModelTrainerConfig)
 class ConfigurationManager:
     def __init__(
             self,
@@ -68,3 +69,18 @@ class ConfigurationManager:
         )
 
         return model_training_config
+    
+    def get_deep_model_trainer_config(self) -> DeepModelTrainerConfig:
+        config = self.config.deep_model_trainer
+        create_directories([config.root_dir])
+
+        deep_model_trainer_config = DeepModelTrainerConfig(
+            root_dir= config.root_dir,
+            X_train_path= config.X_train_path,
+            y_train_path= config.y_train_path,
+            X_test_path= config.X_test_path,
+            y_test_path= config.y_test_path,
+            params= self.params.deep_learning
+        )
+
+        return deep_model_trainer_config

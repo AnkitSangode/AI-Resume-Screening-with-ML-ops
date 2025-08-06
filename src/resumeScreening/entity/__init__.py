@@ -27,3 +27,12 @@ class ModelTrainerConfig:
     X_test_path: str
     y_test_path: str
     params: dict
+
+@dataclass(frozen=True)
+class DeepModelTrainerConfig:
+    root_dir: str
+    X_train_path: str
+    y_train_path: str
+    X_test_path: str
+    y_test_path: str
+    params: dict

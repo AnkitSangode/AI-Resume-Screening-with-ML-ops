@@ -22,3 +22,10 @@ model_trainer:
   y_train_path: artifacts/feature_engineering/y_train_ml.npy
   X_test_path: artifacts/feature_engineering/X_test_tfidf.pkl
   y_test_path: artifacts/feature_engineering/y_test_ml.npy
+
+deep_model_trainer:
+  root_dir: artifacts/deep_model_trainer
+  X_train_path: artifacts/feature_engineering/X_train_pad.npy
+  y_train_path: artifacts/feature_engineering/y_train_dl.npy
+  X_test_path: artifacts/feature_engineering/X_test_pad.npy
+  y_test_path: artifacts/feature_engineering/y_test_dl.npy

@@ -1,6 +1,6 @@
 
 from resumeScreening import logger
-from src.resumeScreening.utils.common import clean_resume
+from resumeScreening.utils.common import clean_resume
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from resumeScreening.config.configuration import DataTransformationConfig

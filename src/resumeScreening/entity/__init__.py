@@ -36,3 +36,12 @@ class DeepModelTrainerConfig:
     X_test_path: str
     y_test_path: str
     params: dict
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    test_data_path : Path
+    label_encoder_path: Path
+    vectorizer_path: Path
+    ml_model_path: dict
+    dl_model_path: Path
+    evaluation_json_path: Path

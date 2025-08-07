@@ -4,7 +4,9 @@ from resumeScreening.entity import (DataIngestionConfig,
                                     DataTransformationConfig,
                                     FeatureEngineeringConfig,
                                     ModelTrainerConfig,
-                                    DeepModelTrainerConfig)
+                                    DeepModelTrainerConfig,
+                                    ModelEvaluationConfig)
+from pathlib import Path
 class ConfigurationManager:
     def __init__(
             self,
@@ -84,3 +86,20 @@ class ConfigurationManager:
         )
 
         return deep_model_trainer_config
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+
+        model_evaluation_config = ModelEvaluationConfig(
+            test_data_path= Path(config.test_data_path),
+            label_encoder_path= Path(config.label_encoder_path),
+            vectorizer_path= Path(config.vectorizer_path),
+            ml_model_path= {
+                "logisticregression": Path(config.ml_model_path.logreg),
+                "RandomForest": Path(config.ml_model_path.rf),
+                "SVM": Path(config.ml_model_path.svc)
+            },
+            dl_model_path= Path(config.dl_model_path),
+            evaluation_json_path= Path (config.evaluation_json_path)
+        )
+        return model_evaluation_config

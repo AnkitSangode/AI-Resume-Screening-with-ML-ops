@@ -1,29 +1,27 @@
 from resumeScreening.config.configuration import ConfigurationManager
-from resumeScreening.components.deep_model_trainer import DeepModelTrainer
+from resumeScreening.components.model_evaluation import ModelEvaluation
 from resumeScreening import logger
 
-
-
-class DeepModelTrainerPipeline:
+class ModelEvaluationPipeline:
     def __init__(self):
         pass
 
     def main(self):
         try:
             config = ConfigurationManager()
-            get_deep_model_trainer_config = config.get_deep_model_trainer_config()
-            deep_model_training = DeepModelTrainer(get_deep_model_trainer_config)
-            deep_model_training.train_and_save()
+            model_eval_config = config.get_model_evaluation_config()
+            evaluator = ModelEvaluation(config=model_eval_config)
+            evaluator.evaluate()
         except Exception as e:
             raise e
         
-        
-STAGE_NAME = "Deep Model Trainer"
+
+STAGE_NAME = "Model Evaluation"
 
 if __name__ == "__main__":
     try:
         logger.info(f">>>>>>>>>>> {STAGE_NAME} has started")
-        obj = DeepModelTrainerPipeline()
+        obj = ModelEvaluationPipeline()
         obj.main()
         logger.info(f">>>>>>>>>>> {STAGE_NAME} has completed successfully")
     except Exception as e:

@@ -39,4 +39,5 @@ model_evaluation:
     rf: artifacts/model_trainer/randomforestclassifier.pkl
     svc: artifacts/model_trainer/svm.pkl
   dl_model_path: artifacts/deep_model_trainer/deep_model.h5
+  evaluation_json_path: artifacts/model_evaluation/evaluation.json
 

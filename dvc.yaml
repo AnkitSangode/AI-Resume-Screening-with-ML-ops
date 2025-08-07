@@ -1,0 +1,78 @@
+stages:
+  data_ingestion:
+    cmd: python src/resumeScreening/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/resumeScreening/pipeline/stage_01_data_ingestion.py
+    outs:
+      - artifacts/data_ingestion/UpdatedResumeDataSet.csv
+  
+  data_transformation:
+    cmd: python src/resumeScreening/pipeline/stage_02_data_transformation.py
+    deps:
+      - src/resumeScreening/pipeline/stage_02_data_transformation.py
+      - artifacts/data_ingestion/UpdatedResumeDataSet.csv
+    outs:
+      - artifacts/data_transformation/cleaned_data.csv
+      - artifacts/data_transformation/train.csv
+      - artifacts/data_transformation/test.csv
+
+  feature_engineering:
+    cmd: python src/resumeScreening/pipeline/stage_03_feature_engineering.py
+    deps:
+      - src/resumeScreening/pipeline/stage_03_feature_engineering.py
+      - artifacts/data_transformation/train.csv
+      - artifacts/data_transformation/test.csv
+    outs:
+      - artifacts/feature_engineering/vectorizer.pkl
+      - artifacts/feature_engineering/labelEncoder.pkl
+      - artifacts/feature_engineering/tokenizer.pkl
+      - artifacts/feature_engineering/X_test_pad.npy
+      - artifacts/feature_engineering/X_train_pad.npy
+      - artifacts/feature_engineering/y_test_dl.npy
+      - artifacts/feature_engineering/y_train_dl.npy
+      - artifacts/feature_engineering/X_test_tfidf.pkl
+      - artifacts/feature_engineering/X_train_tfidf.pkl
+      - artifacts/feature_engineering/y_test_ml.npy
+      - artifacts/feature_engineering/y_train_ml.npy
+
+  ml_model_training:
+    cmd: python src/resumeScreening/pipeline/stage_04_model_trainer.py
+    deps:
+      - src/resumeScreening/pipeline/stage_04_model_trainer.py
+      - artifacts/feature_engineering/X_test_tfidf.pkl
+      - artifacts/feature_engineering/X_train_tfidf.pkl
+      - artifacts/feature_engineering/y_test_ml.npy
+      - artifacts/feature_engineering/y_train_ml.npy
+      - artifacts/feature_engineering/labelEncoder.pkl
+    outs:
+      - artifacts/model_trainer/logisticregression.pkl
+      - artifacts/model_trainer/randomforestclassifier.pkl
+      - artifacts/model_trainer/svm.pkl
+
+  dl_model_training:
+    cmd: python src/resumeScreening/pipeline/stage_05_deep_model_trainer.py
+    deps:
+      - src/resumeScreening/pipeline/stage_05_deep_model_trainer.py
+      - artifacts/feature_engineering/vectorizer.pkl
+      - artifacts/feature_engineering/X_test_pad.npy
+      - artifacts/feature_engineering/X_train_pad.npy
+      - artifacts/feature_engineering/y_test_dl.npy
+      - artifacts/feature_engineering/y_train_dl.npy
+      - artifacts/feature_engineering/labelEncoder.pkl
+      - artifacts/feature_engineering/tokenizer.pkl
+    outs:
+      - artifacts/deep_model_trainer/deep_model.h5
+
+  model_evaluation:
+    cmd: python src/resumeScreening/pipeline/stage_06_model_evaluation.py
+    deps:
+      - src/resumeScreening/pipeline/stage_06_model_evaluation.py
+      - artifacts/data_transformation/test.csv
+      - artifacts/feature_engineering/vectorizer.pkl
+      - artifacts/feature_engineering/labelEncoder.pkl
+      - artifacts/model_trainer/logisticregression.pkl
+      - artifacts/model_trainer/randomforestclassifier.pkl
+      - artifacts/model_trainer/svm.pkl
+      - artifacts/deep_model_trainer/deep_model.h5
+    outs:
+      - artifacts/model_evaluation/evaluation.json

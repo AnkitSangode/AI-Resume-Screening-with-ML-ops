@@ -1,0 +1,218 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/resumeScreening/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: src/resumeScreening/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: c477ca98a512460635c5c99bb8626209
+      size: 905
+    outs:
+    - path: artifacts/data_ingestion/UpdatedResumeDataSet.csv
+      hash: md5
+      md5: 57d16b34db722a7ffc5842173803d9cc
+      size: 3107005
+  data_transformation:
+    cmd: python src/resumeScreening/pipeline/stage_02_data_transformation.py
+    deps:
+    - path: artifacts/data_ingestion/UpdatedResumeDataSet.csv
+      hash: md5
+      md5: 57d16b34db722a7ffc5842173803d9cc
+      size: 3107005
+    - path: src/resumeScreening/pipeline/stage_02_data_transformation.py
+      hash: md5
+      md5: 9258ae9efe36fa057517931768f95cbf
+      size: 901
+    outs:
+    - path: artifacts/data_transformation/cleaned_data.csv
+      hash: md5
+      md5: 673dc77b85ff2e902f34990953f9ef4b
+      size: 5469276
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 0fd2e6a9a55140bac3136f828d6ce344
+      size: 1164353
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: a436b88fc9b486d09d319ae1ed4d6789
+      size: 4304955
+  feature_engineering:
+    cmd: python src/resumeScreening/pipeline/stage_03_feature_engineering.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 0fd2e6a9a55140bac3136f828d6ce344
+      size: 1164353
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: a436b88fc9b486d09d319ae1ed4d6789
+      size: 4304955
+    - path: src/resumeScreening/pipeline/stage_03_feature_engineering.py
+      hash: md5
+      md5: a4768d721441c7cf9c0d9e3aaf8a3b06
+      size: 970
+    outs:
+    - path: artifacts/feature_engineering/X_test_pad.npy
+      hash: md5
+      md5: 7e382354bef1873e4a002ec8f93e43ec
+      size: 231728
+    - path: artifacts/feature_engineering/X_test_tfidf.pkl
+      hash: md5
+      md5: 8a6941e24809cebc00eed8565f2973c3
+      size: 155035
+    - path: artifacts/feature_engineering/X_train_pad.npy
+      hash: md5
+      md5: 532d1c7f4f2c4e3f1571d028508b87dd
+      size: 922928
+    - path: artifacts/feature_engineering/X_train_tfidf.pkl
+      hash: md5
+      md5: 18be18aba9a7bf5127269cffcb63febc
+      size: 589039
+    - path: artifacts/feature_engineering/labelEncoder.pkl
+      hash: md5
+      md5: 6f485a3151d841b5b47d6f0ccb58108f
+      size: 633
+    - path: artifacts/feature_engineering/tokenizer.pkl
+      hash: md5
+      md5: e762d91fa09c9d222506ce1e19cb60d5
+      size: 263788
+    - path: artifacts/feature_engineering/vectorizer.pkl
+      hash: md5
+      md5: 50d75118fc51bf63edc6cf8ab25b8a3b
+      size: 11851
+    - path: artifacts/feature_engineering/y_test_dl.npy
+      hash: md5
+      md5: 979a54431c706a904338b1e235bef2c1
+      size: 38728
+    - path: artifacts/feature_engineering/y_test_ml.npy
+      hash: md5
+      md5: e362bf2be6589f2bb9c25eb200159a35
+      size: 1672
+    - path: artifacts/feature_engineering/y_train_dl.npy
+      hash: md5
+      md5: 296a4a6dbf4017bb7a36e947faecba4d
+      size: 153928
+    - path: artifacts/feature_engineering/y_train_ml.npy
+      hash: md5
+      md5: afe8bf56c26f4c8e8dfbcd99af49421f
+      size: 6280
+  ml_model_training:
+    cmd: python src/resumeScreening/pipeline/stage_04_model_trainer.py
+    deps:
+    - path: artifacts/feature_engineering/X_test_tfidf.pkl
+      hash: md5
+      md5: 8a6941e24809cebc00eed8565f2973c3
+      size: 155035
+    - path: artifacts/feature_engineering/X_train_tfidf.pkl
+      hash: md5
+      md5: 18be18aba9a7bf5127269cffcb63febc
+      size: 589039
+    - path: artifacts/feature_engineering/labelEncoder.pkl
+      hash: md5
+      md5: 6f485a3151d841b5b47d6f0ccb58108f
+      size: 633
+    - path: artifacts/feature_engineering/y_test_ml.npy
+      hash: md5
+      md5: e362bf2be6589f2bb9c25eb200159a35
+      size: 1672
+    - path: artifacts/feature_engineering/y_train_ml.npy
+      hash: md5
+      md5: afe8bf56c26f4c8e8dfbcd99af49421f
+      size: 6280
+    - path: src/resumeScreening/pipeline/stage_04_model_trainer.py
+      hash: md5
+      md5: 8cd20b0c8bf4a812da5c97798d5ed5b0
+      size: 910
+    outs:
+    - path: artifacts/model_trainer/logisticregression.pkl
+      hash: md5
+      md5: 0177db54b3a7d8f580954eb2d9c50da5
+      size: 61090
+    - path: artifacts/model_trainer/randomforestclassifier.pkl
+      hash: md5
+      md5: 6e85f41b241eb490dc1ce5734351e988
+      size: 3321448
+    - path: artifacts/model_trainer/svm.pkl
+      hash: md5
+      md5: cbbaef828921820a2d19d2710ace317f
+      size: 290073
+  dl_model_training:
+    cmd: python src/resumeScreening/pipeline/stage_05_deep_model_trainer.py
+    deps:
+    - path: artifacts/feature_engineering/X_test_pad.npy
+      hash: md5
+      md5: 7e382354bef1873e4a002ec8f93e43ec
+      size: 231728
+    - path: artifacts/feature_engineering/X_train_pad.npy
+      hash: md5
+      md5: 532d1c7f4f2c4e3f1571d028508b87dd
+      size: 922928
+    - path: artifacts/feature_engineering/labelEncoder.pkl
+      hash: md5
+      md5: 6f485a3151d841b5b47d6f0ccb58108f
+      size: 633
+    - path: artifacts/feature_engineering/tokenizer.pkl
+      hash: md5
+      md5: e762d91fa09c9d222506ce1e19cb60d5
+      size: 263788
+    - path: artifacts/feature_engineering/vectorizer.pkl
+      hash: md5
+      md5: 50d75118fc51bf63edc6cf8ab25b8a3b
+      size: 11851
+    - path: artifacts/feature_engineering/y_test_dl.npy
+      hash: md5
+      md5: 979a54431c706a904338b1e235bef2c1
+      size: 38728
+    - path: artifacts/feature_engineering/y_train_dl.npy
+      hash: md5
+      md5: 296a4a6dbf4017bb7a36e947faecba4d
+      size: 153928
+    - path: src/resumeScreening/pipeline/stage_05_deep_model_trainer.py
+      hash: md5
+      md5: eb9fcf9a8fee2e58602b7ccf6adeee6a
+      size: 1018
+    outs:
+    - path: artifacts/deep_model_trainer/deep_model.h5
+      hash: md5
+      md5: 86641b8a228bdad45f655cc26d881ff4
+      size: 3535840
+  model_evaluation:
+    cmd: python src/resumeScreening/pipeline/stage_06_model_evaluation.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 0fd2e6a9a55140bac3136f828d6ce344
+      size: 1164353
+    - path: artifacts/deep_model_trainer/deep_model.h5
+      hash: md5
+      md5: 86641b8a228bdad45f655cc26d881ff4
+      size: 3535840
+    - path: artifacts/feature_engineering/labelEncoder.pkl
+      hash: md5
+      md5: 6f485a3151d841b5b47d6f0ccb58108f
+      size: 633
+    - path: artifacts/feature_engineering/vectorizer.pkl
+      hash: md5
+      md5: 50d75118fc51bf63edc6cf8ab25b8a3b
+      size: 11851
+    - path: artifacts/model_trainer/logisticregression.pkl
+      hash: md5
+      md5: 0177db54b3a7d8f580954eb2d9c50da5
+      size: 61090
+    - path: artifacts/model_trainer/randomforestclassifier.pkl
+      hash: md5
+      md5: 6e85f41b241eb490dc1ce5734351e988
+      size: 3321448
+    - path: artifacts/model_trainer/svm.pkl
+      hash: md5
+      md5: cbbaef828921820a2d19d2710ace317f
+      size: 290073
+    - path: src/resumeScreening/pipeline/stage_06_model_evaluation.py
+      hash: md5
+      md5: a5957e05d3aeadf7dcf4de6aa425e88f
+      size: 953
+    outs:
+    - path: artifacts/model_evaluation/evaluation.json
+      hash: md5
+      md5: d2eee0713a21ed9ff98872d16d4db572
+      size: 8343

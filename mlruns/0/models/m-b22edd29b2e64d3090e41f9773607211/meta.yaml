@@ -1,0 +1,10 @@
+artifact_location: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-b22edd29b2e64d3090e41f9773607211/artifacts
+creation_timestamp: 1754560096597
+experiment_id: '0'
+last_updated_timestamp: 1754560114410
+model_id: m-b22edd29b2e64d3090e41f9773607211
+model_type: null
+name: DeepModel
+source_run_id: 5ea0078c47714f30bf05918085c3378a
+status: 2
+status_message: null

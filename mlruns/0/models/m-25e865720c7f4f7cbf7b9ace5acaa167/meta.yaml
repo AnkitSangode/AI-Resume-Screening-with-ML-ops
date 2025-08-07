@@ -1,0 +1,10 @@
+artifact_location: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-25e865720c7f4f7cbf7b9ace5acaa167/artifacts
+creation_timestamp: 1754558989520
+experiment_id: '0'
+last_updated_timestamp: 1754558999073
+model_id: m-25e865720c7f4f7cbf7b9ace5acaa167
+model_type: null
+name: logisticregression
+source_run_id: 7a85ee5520a34e7c805c6581ae1389a9
+status: 2
+status_message: null

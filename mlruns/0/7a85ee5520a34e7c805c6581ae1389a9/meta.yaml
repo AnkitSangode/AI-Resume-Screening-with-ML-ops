@@ -1,0 +1,14 @@
+artifact_uri: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/7a85ee5520a34e7c805c6581ae1389a9/artifacts
+end_time: 1754558999103
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7a85ee5520a34e7c805c6581ae1389a9
+run_name: logisticregression_eval
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754558989349
+status: 3
+tags: []
+user_id: Ankit

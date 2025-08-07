@@ -26,7 +26,7 @@ class FeatureEngineering:
 
          # === ML: TF-IDF ===
         logger.info("Fitting TF-IDF Vectorizer...")
-        tfidf = TfidfVectorizer(max_features=3000)
+        tfidf = TfidfVectorizer(max_features=300)
         X_train_tfidf = tfidf.fit_transform(X_train_texts)
         X_test_tfidf = tfidf.transform(X_test_texts)
 

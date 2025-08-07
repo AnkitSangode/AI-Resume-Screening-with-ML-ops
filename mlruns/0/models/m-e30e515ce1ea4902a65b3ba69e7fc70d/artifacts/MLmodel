@@ -1,0 +1,22 @@
+artifact_path: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-e30e515ce1ea4902a65b3ba69e7fc70d/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.1.4
+model_id: m-e30e515ce1ea4902a65b3ba69e7fc70d
+model_size_bytes: 601099
+model_uuid: m-e30e515ce1ea4902a65b3ba69e7fc70d
+prompts: null
+run_id: feee3c7e998944a8b27106637e5d8298
+utc_time_created: '2025-08-07 09:33:53.086752'

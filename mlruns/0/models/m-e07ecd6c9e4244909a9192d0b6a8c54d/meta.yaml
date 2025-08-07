@@ -1,0 +1,10 @@
+artifact_location: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-e07ecd6c9e4244909a9192d0b6a8c54d/artifacts
+creation_timestamp: 1754559242628
+experiment_id: '0'
+last_updated_timestamp: 1754559247745
+model_id: m-e07ecd6c9e4244909a9192d0b6a8c54d
+model_type: null
+name: RandomForest
+source_run_id: 24be26a143494768919d3bca96790723
+status: 2
+status_message: null

@@ -29,3 +29,14 @@ deep_model_trainer:
   y_train_path: artifacts/feature_engineering/y_train_dl.npy
   X_test_path: artifacts/feature_engineering/X_test_pad.npy
   y_test_path: artifacts/feature_engineering/y_test_dl.npy
+
+model_evaluation:
+  test_data_path: artifacts/data_transformation/test.csv
+  label_encoder_path: artifacts/feature_engineering/labelEncoder.pkl
+  vectorizer_path: artifacts/feature_engineering/vectorizer.pkl
+  ml_model_path:
+    logreg: artifacts/model_trainer/logisticregression.pkl
+    rf: artifacts/model_trainer/randomforestclassifier.pkl
+    svc: artifacts/model_trainer/svm.pkl
+  dl_model_path: artifacts/deep_model_trainer/deep_model.h5
+

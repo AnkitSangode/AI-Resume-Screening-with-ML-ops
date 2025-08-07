@@ -1,0 +1,20 @@
+artifact_path: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-b22edd29b2e64d3090e41f9773607211/artifacts
+flavors:
+  keras:
+    data: data
+    keras_backend: tensorflow
+    keras_version: 3.11.1
+    save_exported_model: false
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.keras
+    python_version: 3.11.0
+mlflow_version: 3.1.4
+model_id: m-b22edd29b2e64d3090e41f9773607211
+model_size_bytes: 1193363
+model_uuid: m-b22edd29b2e64d3090e41f9773607211
+prompts: null
+run_id: 5ea0078c47714f30bf05918085c3378a
+utc_time_created: '2025-08-07 09:48:16.674080'

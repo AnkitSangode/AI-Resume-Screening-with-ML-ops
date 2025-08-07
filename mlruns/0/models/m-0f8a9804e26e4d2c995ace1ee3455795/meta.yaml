@@ -1,0 +1,10 @@
+artifact_location: file:///d:/Python/Industry%20level/EndtoEnd%20combination/AI-Resume-Screening-with-ML-ops/mlruns/0/models/m-0f8a9804e26e4d2c995ace1ee3455795/artifacts
+creation_timestamp: 1754560089310
+experiment_id: '0'
+last_updated_timestamp: 1754560094842
+model_id: m-0f8a9804e26e4d2c995ace1ee3455795
+model_type: null
+name: SVM
+source_run_id: 597ac5dc729f4f75bec42418bab9f20d
+status: 2
+status_message: null
